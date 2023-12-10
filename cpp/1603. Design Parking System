@@ -1,0 +1,38 @@
+class ParkingSystem {
+public:
+    int b,m,s,bc=0,mc=0,sc=0;
+    ParkingSystem(int big, int medium, int small) {
+        b = big; m= medium ; s = small;
+    }
+    
+    bool addCar(int c) {
+        if(c == 3){
+            if(sc == s){
+                return false;
+            }else{
+                sc++;
+                return true;
+            }
+        }else if(c == 2){
+            if(mc == m){
+                return false;
+            }else{
+                mc++;
+                return true;
+            }
+        }else{
+            if(bc == b){
+                return false;
+            }else{
+                bc++;
+                return true;
+            }
+        }
+    }
+};
+
+/**
+ * Your ParkingSystem object will be instantiated and called as such:
+ * ParkingSystem* obj = new ParkingSystem(big, medium, small);
+ * bool param_1 = obj->addCar(carType);
+ */
