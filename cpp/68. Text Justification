@@ -1,0 +1,66 @@
+class Solution {
+public:
+    string makestring(vector<string>& words,int maxWidth, int i, int j){
+        int size =0;
+        for(int k=i; k<=j; k++) size += words[k].size();
+        int leftspace = maxWidth - size;
+        int space = maxWidth-size;
+        if(j != i)
+            space = leftspace/(j-i);
+        string ans ="";
+        if(j==i){
+            ans += words[i];
+            while(ans.size()<maxWidth)
+                ans += " ";
+        }else{
+            int modulo = leftspace%(j-i);
+            while(i<=j){
+                ans += words[i];
+                int temp = space;
+                while(temp-- && ans.size()<maxWidth){
+                    ans += " ";
+                }
+                if(ans.size() != maxWidth && modulo){
+                    ans += " ";
+                    modulo--;
+                }
+                i++;
+            }
+        }
+        return ans;
+
+    }
+    vector<string> fullJustify(vector<string>& words, int maxWidth) {
+        int n = words.size(),i=0;
+        vector<string>ans;
+        while(i<n){
+            int size =0;
+            int temp = i;
+            while(i<n && size<maxWidth){
+                if(size + words[i].size() <= maxWidth){
+                    size += words[i].size()+1;
+                    i++;
+                }else{
+                    break;
+                }
+            }
+            string x = "";
+            if(i==n){
+                while(temp<i){
+                    x += words[temp];
+                    if(i != temp-1 && x.size()<maxWidth)
+                        x += " ";
+                    temp++;
+                }
+                while(x.size()<maxWidth){
+                    x += " ";
+                }
+            }else{
+                x = makestring(words,maxWidth,temp,i-1);
+            }
+            ans.push_back(x);
+            
+        }
+        return ans;
+    }
+};
