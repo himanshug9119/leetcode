@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int partitionString(string s) {
+        unordered_set<char> set;
+        int n = s.size();
+        int count =0;
+        for(int i=0; i<n; i++){
+            if(set.find(s[i]) != set.end()){
+                count++;
+                set.clear();
+            }
+            set.insert(s[i]);
+        }
+        return count+1;
+    }
+};
